@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 menü</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .example-container {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .example-title { margin-bottom: 1rem; color: #e8491d; }
+        canvas { border: 1px solid #000; background-color: #fff; }
+        #dropArea {
+            width: 200px; height: 100px; border: 2px dashed #ccc;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 1rem;
+        }
+        #dropArea.highlight {
+            border-color: #e8491d; background-color: #ffece6;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Web-programozás 1 Előadás Házi feladat</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="index.html">Kezdőlap</a></li>
+        <li><a href="table.html">Táblázat menü</a></li>
+        <li><a href="html5.html">HTML5 menü</a></li>
+        <li><a href="chart.html">ChartJS menü</a></li>
+        <li><a href="ajax.html">AJAX menü</a></li>
+        <li><a href="oojs.html">OOJS menü</a></li>
+        <li><a href="react.html">React</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <aside>
+        <h3>HTML5 menü</h3>
+        <p>Ez az oldal a HTML5 újdonságait mutatja be.</p>
+    </aside>
+    <main id="content">
+        <h2>HTML5 újdonságok</h2>
+
+        <div class="example-container">
+            <h3 class="example-title">Web Storage</h3>
+            <div>
+                <input type="text" id="storageInput" placeholder="Írj valamit...">
+                <button id="saveBtn">Mentés</button>
+                <button id="loadBtn">Betöltés</button>
+                <button id="clearBtn">Törlés</button>
+            </div>
+            <p id="storageOutput"></p>
+        </div>
+
+        <div class="example-container">
+            <h3 class="example-title">Web Workers</h3>
+            <div>
+                <button id="startWorkerBtn">Számítás indítása</button>
+                <button id="stopWorkerBtn">Megszakítás</button>
+            </div>
+            <p id="workerOutput">Kattints a "Számítás indítása" gombra!</p>
+        </div>
+
+        <div class="example-container">
+            <h3 class="example-title">Server-Sent Events</h3>
+            <div>
+                <button id="startSSEBtn">SSE indítása</button>
+                <button id="stopSSEBtn">SSE leállítása</button>
+            </div>
+            <p id="sseOutput">Kattints a "SSE indítása" gombra!</p>
+        </div>
+
+        <div class="example-container">
+            <h3 class="example-title">Geolocation API</h3>
+            <div>
+                <button id="geolocationBtn">Helyzet lekérése</button>
+            </div>
+            <p id="geolocationOutput"></p>
+        </div>
+
+        <div class="example-container">
+            <h3 class="example-title">Drag and Drop API</h3>
+            <div>
+                <p>Húzd át a képet a célterületre!</p>
+                <img id="dragImage" src="./njeicon.png" draggable="true" width="100" height="100">
+                <div id="dropArea">Húzd ide a képet</div>
+            </div>
+        </div>
+
+        <div class="example-container">
+            <h3 class="example-title">Canvas</h3>
+            <div>
+                <canvas id="myCanvas" width="300" height="200"></canvas>
+                <div>
+                    <button id="drawBtn">Rajzolás</button>
+                    <button id="clearCanvasBtn">Törlés</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-container">
+            <h3 class="example-title">SVG</h3>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="80" fill="#e8491d" />
+                <rect x="50" y="50" width="100" height="100" fill="#35424a" opacity="0.7" />
+                <text x="100" y="110" text-anchor="middle" fill="white">SVG</text>
+            </svg>
+        </div>
+    </main>
+</div>
+<footer>
+    <p>Készítette: Fityó Györgyi (LW34MW) és Fedor Attila (CCP9C6)</p>
+</footer>
+<script src="html5.js"></script>
+</body>
+</html>
