@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React alkalmazás</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- React és ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        .react-app {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        
+        .react-app h3 {
+            color: #e8491d;
+            margin-bottom: 1rem;
+        }
+        
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .calculator-display {
+            grid-column: span 4;
+            background-color: #35424a;
+            color: white;
+            padding: 10px;
+            text-align: right;
+            font-size: 1.5rem;
+            border-radius: 5px;
+        }
+        
+        .calculator button {
+            padding: 10px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #09748f;
+            cursor: pointer;
+        }
+        
+        .calculator button:hover {
+            background-color: #033b49;
+        }
+        
+        .calculator button.operator {
+            background-color: #03242c;
+            color: white;
+        }
+        
+        .calculator button.span-2 {
+            grid-column: span 2;
+        }
+        
+        .todo-app {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .todo-input {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .todo-input input {
+            flex: 1;
+            padding: 8px;
+            font-size: 1rem;
+        }
+        
+        .todo-input button {
+            padding: 8px 16px;
+            background-color: #09748f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .todo-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .todo-item button {
+            background-color: #09748f;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 3px 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Web-programozás beadandó feldata</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="table.html">Táblázat menü</a></li>
+            <li><a href="html5.html">HTML5 menü</a></li>
+            <li><a href="chart.html">ChartJS menü</a></li>
+            <li><a href="ajax.html">AJAX menü</a></li>
+            <li><a href="oojs.html">OOJS menü</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <aside>
+            <h3>React alkalmazás</h3>
+            <p>Ez az oldal két React alkalmazást mutat be.</p>
+        </aside>
+        
+        <main id="content">
+            <h2>React alkalmazások</h2>
+            
+            <div id="calculatorApp" class="react-app"></div>
+            <div id="todoApp" class="react-app"></div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>Készítette: Fityó Györgyi (LW34MW) és Fedor Attila (CCP9C6)</p>
+    </footer>
+    
+    <!-- Calculator alkalmazás -->
+    <script type="text/babel">
+        const Calculator = () => {
+            const [display, setDisplay] = React.useState('0');
+            const [firstOperand, setFirstOperand] = React.useState(null);
+            const [operator, setOperator] = React.useState(null);
+            const [waitingForSecondOperand, setWaitingForSecondOperand] = React.useState(false);
+            
+            const inputDigit = (digit) => {
+                if (waitingForSecondOperand) {
+                    setDisplay(String(digit));
+                    setWaitingForSecondOperand(false);
+                } else {
+                    setDisplay(display === '0' ? String(digit) : display + digit);
+                }
+            };
+            
+            const inputDecimal = () => {
+                if (waitingForSecondOperand) {
+                    setDisplay('.');
+                    setWaitingForSecondOperand(false);
+                    return;
+                }
+                
+                if (!display.includes('.')) {
+                    setDisplay(display + '.');
+                }
+            };
+            
+            const clearDisplay = () => {
+                setDisplay('0');
+                setFirstOperand(null);
+                setOperator(null);
+                setWaitingForSecondOperand(false);
+            };
+            
+            const handleOperator = (nextOperator) => {
+                const inputValue = parseFloat(display);
+                
+                if (firstOperand === null) {
+                    setFirstOperand(inputValue);
+                } else if (operator) {
+                    const result = performCalculation();
+                    setDisplay(String(result));
+                    setFirstOperand(result);
+                }
+                
+                setWaitingForSecondOperand(true);
+                setOperator(nextOperator);
+            };
+            
+            const performCalculation = () => {
+                if (firstOperand === null || operator === null) return parseFloat(display);
+                
+                const inputValue = parseFloat(display);
+                let result = 0;
+                
+                switch (operator) {
+                    case '+':
+                        result = firstOperand + inputValue;
+                        break;
+                    case '-':
+                        result = firstOperand - inputValue;
+                        break;
+                    case '*':
+                        result = firstOperand * inputValue;
+                        break;
+                    case '/':
+                        result = firstOperand / inputValue;
+                        break;
+                    default:
+                        return inputValue;
+                }
+                
+                return result;
+            };
+            
+            const handleEquals = () => {
+                if (firstOperand === null || operator === null) return;
+                
+                const result = performCalculation();
+                setDisplay(String(result));
+                setFirstOperand(null);
+                setOperator(null);
+                setWaitingForSecondOperand(false);
+            };
+            
+            return (
+                <div>
+                    <h3>Számológép</h3>
+                    
+<div className="calculator">
+  <div className="calculator-display">{display}</div>
+  <button onClick={clearDisplay} className="operator">C</button>
+  <button onClick={() => handleOperator('/')} className="operator">/</button>
+  <button onClick={() => handleOperator('*')} className="operator">*</button>
+  <button onClick={() => handleOperator('-')} className="operator">-</button>
+
+  <button onClick={() => inputDigit(7)}>7</button>
+  <button onClick={() => inputDigit(8)}>8</button>
+  <button onClick={() => inputDigit(9)}>9</button>
+  <button onClick={() => handleOperator('+')} className="operator">+</button>
+
+  <button onClick={() => inputDigit(4)}>4</button>
+  <button onClick={() => inputDigit(5)}>5</button>
+  <button onClick={() => inputDigit(6)}>6</button>
+  <button onClick={handleEquals} className="operator">=</button>
+
+  <button onClick={() => inputDigit(1)}>1</button>
+  <button onClick={() => inputDigit(2)}>2</button>
+  <button onClick={() => inputDigit(3)}>3</button>
+  <button onClick={() => inputDigit(0)} className="span-2">0</button>
+  <button onClick={inputDecimal}>.</button>
+</div>
+
+</div>
+            );
+        };
+        
+        ReactDOM.render(<Calculator />, document.getElementById('calculatorApp'));
+    </script>
+    
+    <!-- Todo alkalmazás -->
+    <script type="text/babel">
+        const TodoApp = () => {
+            const [todos, setTodos] = React.useState([]);
+            const [inputValue, setInputValue] = React.useState('');
+            
+            const addTodo = () => {
+                if (inputValue.trim()) {
+                    setTodos([...todos, { 
+                        id: Date.now(), 
+                        text: inputValue, 
+                        completed: false 
+                    }]);
+                    setInputValue('');
+                }
+            };
+            
+            const toggleTodo = (id) => {
+                setTodos(todos.map(todo => 
+                    todo.id === id ? { ...todo, completed: !todo.completed } : todo
+                ));
+            };
+            
+            const deleteTodo = (id) => {
+                setTodos(todos.filter(todo => todo.id !== id));
+            };
+            
+            const handleKeyPress = (e) => {
+                if (e.key === 'Enter') {
+                    addTodo();
+                }
+            };
+            
+            return (
+                <div>
+                    <h3>Todo Lista</h3>
+                    <div className="todo-app">
+                        <div className="todo-input">
+                            <input 
+                                type="text" 
+                                value={inputValue} 
+                                onChange={(e) => setInputValue(e.target.value)}
+                                onKeyPress={handleKeyPress}
+                                placeholder="Új feladat..."
+                            />
+                            <button onClick={addTodo}>Hozzáad</button>
+                        </div>
+                        <ul className="todo-list">
+                            {todos.map(todo => (
+                                <li key={todo.id} className="todo-item">
+                                    <span 
+                                        style={{ 
+                                            textDecoration: todo.completed ? 'line-through' : 'none',
+                                            cursor: 'pointer'
+                                        }}
+                                        onClick={() => toggleTodo(todo.id)}
+                                    >
+                                        {todo.text}
+                                    </span>
+                                    <button onClick={() => deleteTodo(todo.id)}>Törlés</button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            );
+        };
+        
+        ReactDOM.render(<TodoApp />, document.getElementById('todoApp'));
+    </script>
+</body>
+</html>
