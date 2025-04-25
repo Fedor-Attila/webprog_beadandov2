@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOJS menü</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: #f4f4f4;
+            border: 1px solid #35424a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .cell:hover {
+            background-color: #ffece6;
+        }
+        
+        .game-info {
+            margin-bottom: 1rem;
+        }
+        
+        .controls {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Web-programozás beadandó feldata</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="table.html">Táblázat menü</a></li>
+            <li><a href="html5.html">HTML5 menü</a></li>
+            <li><a href="chart.html">ChartJS menü</a></li>
+            <li><a href="ajax.html">AJAX menü</a></li>
+            <li><a href="oojs.html">OOJS menü</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <aside>
+            <h3>OOJS menü</h3>
+            <p>Ez az oldal az Objektumorientált JavaScript példáját mutatja be.</p>
+        </aside>
+        
+        <main id="content">
+            <h2>Objektumorientált JavaScript - Amőba játék</h2>
+            
+            <div class="game-container">
+                <div class="game-info" id="gameInfo"></div>
+                <div class="game-board" id="gameBoard"></div>
+                <div class="controls">
+                    <button id="newGameBtn">Új játék</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>Készítette: Fityó Györgyi (LW34MW) és Fedor Attila (CCP9C6)</p>
+    </footer>
+    
+    <script src="oojs.js"></script>
+</body>
+</html>
