@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX menü</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Web-programozás beadandó feldata</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="table.html">Táblázat menü</a></li>
+            <li><a href="html5.html">HTML5 menü</a></li>
+            <li><a href="chart.html">ChartJS menü</a></li>
+            <li><a href="ajax.html">AJAX menü</a></li>
+            <li><a href="oojs.html">OOJS menü</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <aside>
+            <h3>AJAX menü</h3>
+            <p>Ez az oldal az AJAX műveleteket mutatja be egy API-val.</p>
+        </aside>
+        
+        <main id="content">
+            <h2>AJAX műveletek</h2>
+            
+            <div class="api-section">
+                <h3>API információk</h3>
+                <p>API URL: <code>http://gamf.nhely.hu/ajax2/</code></p>
+                <p>Code paraméter: <code>CCP9C6lw34mw</code> (Neptun kód + egyedi kód)</p>
+            </div>
+            
+            <div class="operation-section">
+                <h3>Read művelet</h3>
+                <button id="readBtn">Adatok lekérése</button>
+                <div id="readOutput"></div>
+                <div id="statsOutput"></div>
+            </div>
+            
+            <div class="operation-section">
+                <h3>Create művelet</h3>
+                <div class="form-group">
+                    <label for="createName">Név:</label>
+                    <input type="text" id="createName" required maxlength="30">
+                    
+                    <label for="createHeight">Magasság:</label>
+                    <input type="text" id="createHeight" required maxlength="30">
+                    
+                    <label for="createWeight">Súly:</label>
+                    <input type="text" id="createWeight" required maxlength="30">
+                    
+                    <button id="createBtn">Adat létrehozása</button>
+                </div>
+                <div id="createOutput"></div>
+            </div>
+            
+            <div class="operation-section">
+                <h3>Update művelet</h3>
+                <div class="form-group">
+                    <label for="updateId">ID:</label>
+                    <input type="text" id="updateId">
+                    <button id="getDataBtn">Adatok lekérése ID alapján</button>
+                    
+                    <label for="updateName">Név:</label>
+                    <input type="text" id="updateName" required maxlength="30">
+                    
+                    <label for="updateHeight">Magasság:</label>
+                    <input type="text" id="updateHeight" required maxlength="30">
+                    
+                    <label for="updateWeight">Súly:</label>
+                    <input type="text" id="updateWeight" required maxlength="30">
+                    
+                    <button id="updateBtn">Adat frissítése</button>
+                </div>
+                <div id="updateOutput"></div>
+            </div>
+            
+            <div class="operation-section">
+                <h3>Delete művelet</h3>
+                <div class="form-group">
+                    <label for="deleteId">ID:</label>
+                    <input type="text" id="deleteId">
+                    <button id="deleteBtn">Adat törlése</button>
+                </div>
+                <div id="deleteOutput"></div>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>Készítette: Fityó Györgyi (LW34MW) és Fedor Attila (CCP9C6)</p>
+    </footer>
+    
+    <script src="ajax.js"></script>
+</body>
+</html>
